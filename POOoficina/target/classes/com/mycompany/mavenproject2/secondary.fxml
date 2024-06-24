@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="94.0" prefWidth="917.0" style="-fx-background-color: #aba311;">
+         <children>
+            <ImageView fitHeight="88.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../POO_project/POO_project/src/main/resources/br/unesp/rc/poo_project/imagens/icon_aba_motor.png" />
+               </image>
+            </ImageView>
+            <Label text=" Motor">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutY="566.0" prefHeight="61.0" prefWidth="241.0" style="-fx-padding: 10;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="155.0" text="Voltar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutY="94.0" prefHeight="469.0" prefWidth="917.0" style="-fx-background-color: #385703;" />
+   </children>
+</AnchorPane>

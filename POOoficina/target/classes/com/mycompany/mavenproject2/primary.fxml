@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.cursos.*?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject2.PrimaryController">
+   <children>
+      <VBox fx:id="geral" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="menubar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="623.0" style="-fx-background-color: #191061;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="66.0">
+                           <children>
+                              <Label text="CarSync" textFill="#d0c2c2">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="527.0">
+                           <children>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#actionMotor" prefHeight="70.0" prefWidth="235.0" text="Motor">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeTemp" prefHeight="70.0" prefWidth="235.0" text="Temperatura">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeBat" prefHeight="70.0" prefWidth="235.0" text="Bateria">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changePres" prefHeight="70.0" prefWidth="235.0" text="Pressão">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeNiv" prefHeight="70.0" prefWidth="235.0" text="Níveis">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeFreio" prefHeight="70.0" prefWidth="235.0" text="Freios">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeFreio" prefHeight="70.0" prefWidth="235.0" text="Simular irregularidade">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#actionMotor" prefHeight="70.0" prefWidth="235.0" text="Gerar PDF">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </VBox>
+                        <Pane prefHeight="200.0" prefWidth="0.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="content" prefHeight="623.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="vbox_motor" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/engine.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="50.0" style="-fx-padding: 0 20;" text="Informações do Motor" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainer" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="temp" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/thermometer.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="35.0" style="-fx-padding: 0 20;" text="Informações de Temperatura" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainerTemp" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="bateria" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/battery.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="35.0" style="-fx-padding: 0 20;" text="Informações de Bateria" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainerBat" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="pressao" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/pressure.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="35.0" style="-fx-padding: 0 20;" text="Informações de Pressão" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainerPres" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="niveis" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/nivels.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="35.0" style="-fx-padding: 0 20;" text="Informações de Níveis" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainerNiv" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="freios" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/break.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="50.0" style="-fx-padding: 0 20;" text="Informações de Freios" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="chartContainerFreios" alignment="CENTER" prefHeight="450.0" prefWidth="600" />
+            <Pane prefHeight="100.0" prefWidth="200.0" style="-fx-hgrow: always;" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-padding: 0 20 0;">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionVoltar" prefHeight="67.0" prefWidth="183.0" text="Voltar" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
