@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.scene.control.Alert;
 
 public class PrimaryController {
 
@@ -285,5 +286,15 @@ public class PrimaryController {
             values,
             "Funcionamento dos freios em %"
         );
+    }
+
+    @FXML
+    private void gerarPdf(){
+        HtmlToPdf.GeneratePDF(globalMonitor);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("PDF Gerado");
+        alert.setHeaderText(null);
+        alert.setContentText("O PDF foi gerado com sucesso!");
+        alert.showAndWait();
     }
 }

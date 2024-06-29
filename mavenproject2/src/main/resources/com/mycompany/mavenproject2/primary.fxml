@@ -64,7 +64,7 @@
                                                 <Font size="20.0" />
                                             </font>
                                         </Button>
-                                        <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#actionMotor" prefHeight="70.0" prefWidth="235.0" text="Gerar PDF">
+                                        <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#gerarPdf" prefHeight="70.0" prefWidth="235.0" text="Gerar PDF">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
