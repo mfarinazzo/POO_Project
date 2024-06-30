@@ -59,7 +59,7 @@
                                                 <Font size="20.0" />
                                             </font>
                                         </Button>
-                                        <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#changeFreio" prefHeight="70.0" prefWidth="235.0" text="Simular irregularidade">
+                                        <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#generateError" prefHeight="70.0" prefWidth="235.0" text="Simular irregularidade">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -115,6 +115,7 @@
         <VBox fx:id="vbox_motor" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.0" prefHeight="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" style="-fx-background-color: #2caffe;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    
                     <children>
                         <ImageView fitHeight="97.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
                             <image>

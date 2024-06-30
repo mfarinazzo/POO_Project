@@ -10,5 +10,6 @@ module com.mycompany.mavenproject2 {
     requires kernel;
     requires layout;
     requires html2pdf;
+    requires javafx.graphics;
     
 }

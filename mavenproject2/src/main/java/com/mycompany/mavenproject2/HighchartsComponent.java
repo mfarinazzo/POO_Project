@@ -19,6 +19,7 @@ public class HighchartsComponent {
     private final String scriptContent;
     private String formattedCategories;
     private String formattedData;
+    private String formattedValidation;
 
     public HighchartsComponent() {
         webView = new WebView();
@@ -29,10 +30,11 @@ public class HighchartsComponent {
         return webView;
     }
 
-    public void setupHighcharts(String title, List<String> categories, List<String> data, String nameData) {
+    public void setupHighcharts(String title, List<String> categories, List<String> data, String nameData, List<Float> validation) {
         // Format categories and data for JavaScript
         this.formattedCategories = formatListForJavaScript(categories);
         this.formattedData = formatDataForJavaScript(data);
+        this.formattedValidation = formatDataForJavaScript(validation.stream().map(String::valueOf).collect(Collectors.toList()));
         // Construir o conteúdo HTML para exibir o gráfico
         String htmlTemplate = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -60,7 +62,13 @@ public class HighchartsComponent {
                 "            title: { text: '%s' }, " +
                 "            xAxis: { categories: %s }, " +
                 "            yAxis: { title: { text: 'Valores' } }, " +
-                "            series: [{ name: '%s', data: %s }]" +
+                "            series: [{ " +
+                "                name: '%s', " +
+                "                data: %s, " +
+                "                zones: %s.map(function(valid) { " +
+                "                    return { color: valid == \"-0.0\" ? 'blue' : 'red' }; " +
+                "                }) " +
+                "            }]" +
                 "        });\n" +
                 "    });\n" +
                 "</script>\n" +
@@ -71,10 +79,10 @@ public class HighchartsComponent {
 try {
             useGraalVM();
         } catch (Exception e) {
-            System.err.println("Falha ao usar GraalVM: " + e.getMessage());
+            System.out.println("Atenção em GraalVM: " + e.getMessage());
         }
 
-        String htmlContent = formatJavaScriptForWebView(htmlTemplate, this.scriptContent, title, formattedCategories, nameData, formattedData);
+        String htmlContent = formatJavaScriptForWebView(htmlTemplate, this.scriptContent, title, formattedCategories, nameData, formattedData, formattedValidation);
 
         // Carregar o conteúdo no WebEngine do WebView
         webView.getEngine().loadContent(htmlContent);
@@ -116,7 +124,7 @@ try {
     }
 
     // Método para formatar o JavaScript para o WebView
-    private String formatJavaScriptForWebView(String template, String scriptContent, String title, String categories, String nameData, String data) {
-        return String.format(template, scriptContent, title, categories, nameData, data);
+    private String formatJavaScriptForWebView(String template, String scriptContent, String title, String categories, String nameData, String data, String validation) {
+        return String.format(template, scriptContent, title, categories, nameData, data, validation);
     }
 }

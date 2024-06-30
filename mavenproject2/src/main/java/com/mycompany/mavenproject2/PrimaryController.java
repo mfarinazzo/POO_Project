@@ -4,6 +4,8 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,12 +85,21 @@ public class PrimaryController {
         
         ArrayList<Float> xData = globalMonitor.getEngineTemp();
         List<String> values = Arrays.asList(xData.get(12).toString(), xData.get(11).toString(), xData.get(10).toString(), xData.get(9).toString(), xData.get(8).toString());
+        
+        List<Float> DataValidation = new ArrayList<>();
+        DataValidation.add(this.ai.testarValor(xData.get(12)/90));
+        DataValidation.add(this.ai.testarValor(xData.get(11)/90));
+        DataValidation.add(this.ai.testarValor(xData.get(10)/90));
+        DataValidation.add(this.ai.testarValor(xData.get(9))/90);
+        DataValidation.add(this.ai.testarValor(xData.get(8))/90);
+
         // Configurar o gráfico com os parâmetros desejados
         highchartsComponent.setupHighcharts(
             "Grafico Motor",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Temperatura do motor em graus Celsius"
+            "Temperatura do motor em graus Celsius",
+            DataValidation
         );
     }
 
@@ -116,8 +127,47 @@ public class PrimaryController {
         geral.setOpacity(1.0);
         geral.setMouseTransparent(false);
         updateChart();
-        
+
+        try {
+            for (int i = 5; i < 13; i++) {
+                vbox_motor.getChildren().remove(i);
+            }
+        } catch (Exception e) {
+            try{
+                for (int i = 5; i < 13; i++) {
+                    temp.getChildren().remove(i);
+                }
+                
+            }catch(Exception e1){
+                try{
+                    for (int i = 5; i < 13; i++) {
+                        bateria.getChildren().remove(i);
+                    }
+                    
+                } catch (Exception e2){
+                    try{
+                        for (int i = 5; i < 13; i++) {
+                            pressao.getChildren().remove(i);
+                        }
+                    } catch (Exception e3){
+                        try{
+                            for (int i = 5; i < 13; i++) {
+                                niveis.getChildren().remove(i);
+                            }
+                            
+                        } catch (Exception e4){
+                            for (int i = 5; i < 13; i++) {
+                                freios.getChildren().remove(i);
+                            }
+                    }
+                    
+                }
+            }
+        }finally{
+            System.out.println("removido a análise");
+        }
     }
+}
 
     private void updateChart() throws IOException{
         // Atualizar o gráfico
@@ -139,33 +189,65 @@ public class PrimaryController {
         
     }
 
+    private void updateChartWrong() throws IOException{
+        // Atualizar o gráfico
+        Monitor.updateBatteryVoltage(currentInteration, 0);
+        Monitor.updateBrakes(currentInteration, 0);
+        Monitor.updateEngineTemp(currentInteration, 0);
+        Monitor.updateLevelWater(currentInteration, 0);
+        Monitor.updateRpm(currentInteration, 1);
+        Monitor.updateTirePressure(currentInteration, 0);
+    }
+
     @FXML
     private void actionMotor() throws IOException {
         setAllSections(0.0, true);
         vbox_motor.setOpacity(1.0);
         vbox_motor.setMouseTransparent(false);
         
+        // Criar um novo componente Highcharts
         HighchartsComponent highchartsComponent = new HighchartsComponent();
+
+        // Adicionar o componente Highcharts ao StackPane
         chartContainer.getChildren().add(highchartsComponent.getView());
+
+        // Obter os dados do motor [0.123, 123, 345, 999, 222]
         ArrayList<Float> xData = globalMonitor.getRpm();
+
+        // Validar os dados
         ArrayList<Float> DataValidation = new ArrayList<>();
         DataValidation.add(this.ai.testarValor(xData.get(12)/1500));
         DataValidation.add(this.ai.testarValor(xData.get(11)/1500));
         DataValidation.add(this.ai.testarValor(xData.get(10)/1500));
         DataValidation.add(this.ai.testarValor(xData.get(9))/1500);
         DataValidation.add(this.ai.testarValor(xData.get(8))/1500);
+
+        //[1, 1, 1, 0, 0]
         System.out.println(DataValidation);
         List<String> values = Arrays.asList(xData.get(12).toString(), xData.get(11).toString(), xData.get(10).toString(), xData.get(9).toString(), xData.get(8).toString());
-        
-        
         
         // Configurar o gráfico com os parâmetros desejados
         highchartsComponent.setupHighcharts(
             "Grafico Motor",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Números de rotação por minuto do motor."
+            "Números de rotação por minuto do motor.",
+            DataValidation
         );
+
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                vbox_motor.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                vbox_motor.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -190,8 +272,22 @@ public class PrimaryController {
             "Grafico Temperatura Motor",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Temperatura do motor em graus Celsius"
+            "Temperatura do motor em graus Celsius",
+            DataValidation
         );
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                temp.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                temp.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -214,8 +310,22 @@ public class PrimaryController {
             "Voltagem da bateria do carro",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Valor da voltagem da bateria"
+            "Valor da voltagem da bateria",
+            DataValidation
         );
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                bateria.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                bateria.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -237,8 +347,22 @@ public class PrimaryController {
             "Nível de água do radiador",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Porcentágem de água no radiador"
+            "Porcentágem de água no radiador",
+            DataValidation
         );
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                niveis.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                niveis.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -259,8 +383,22 @@ public class PrimaryController {
             "Grafico Pressão Pneus",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Pressão em Lbs"
+            "Pressão em Lbs",
+            DataValidation
         );
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                pressao.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                pressao.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -284,8 +422,22 @@ public class PrimaryController {
             "Grafico Freios",
             Arrays.asList("-4h", "-3h", "-2h", "-1h", "agora"),
             values,
-            "Funcionamento dos freios em %"
+            "Funcionamento dos freios em %",
+            DataValidation
         );
+        // Adicionar texto de aviso para valores errados
+        for (int i = 0; i < DataValidation.size(); i++) {
+            System.out.println(DataValidation.get(i));
+            if (DataValidation.get(i) == -0.0f) {
+                Text errorText = new Text("Erro: Valor incorreto para " + xData.get(i));
+                errorText.setFill(Color.RED);
+                freios.getChildren().add(errorText);
+            } else {
+                Text correctText = new Text("Valor correto para " + xData.get(i));
+                correctText.setFill(Color.GREEN);
+                freios.getChildren().add(correctText);
+            }
+        }
     }
 
     @FXML
@@ -296,5 +448,10 @@ public class PrimaryController {
         alert.setHeaderText(null);
         alert.setContentText("O PDF foi gerado com sucesso!");
         alert.showAndWait();
+    }
+
+    @FXML
+    private void generateError() throws IOException{
+        updateChartWrong();
     }
 }
