@@ -16,11 +16,13 @@ public class Monitor {
     private static ArrayList<Float> brakes = new ArrayList<>();
     private static ArrayList<Float> levelWater = new ArrayList<>();
     private static ArrayList<Float> levelOil = new ArrayList<>();
+    private Car car;
 
     private static Generator gen;
 
     public Monitor() throws IOException {
         gen = new Generator();
+        car = new Car();
         if (rpm.isEmpty()) {
             setRpm(1);
             setOilPressure(1);
@@ -275,4 +277,15 @@ public class Monitor {
         }
     }
 
+    public String getCarMarca() {
+        return this.car.getMarca();
+    }
+
+    public String getCarModelo() {
+        return this.car.getModelo();
+    }
+
+    public int getCarAno() {
+        return this.car.getAno();
+    }
 }

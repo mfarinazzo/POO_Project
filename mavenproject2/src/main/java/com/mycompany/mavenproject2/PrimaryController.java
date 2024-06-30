@@ -21,6 +21,9 @@ public class PrimaryController {
     private AI ai = new AI();
 
     @FXML
+    private VBox content2;
+
+    @FXML
     private VBox geral;
 
     @FXML
@@ -101,6 +104,8 @@ public class PrimaryController {
             "Temperatura do motor em graus Celsius",
             DataValidation
         );
+
+        content2.getChildren().add(new Text("Modelo: " + globalMonitor.getCarModelo() + ", Ano: " + globalMonitor.getCarAno() + ", Marca: " + globalMonitor.getCarMarca()));
     }
 
     private void setAllSections(double opacity, boolean bool) {
